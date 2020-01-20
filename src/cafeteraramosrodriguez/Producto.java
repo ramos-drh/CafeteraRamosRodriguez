@@ -10,8 +10,16 @@ package cafeteraramosrodriguez;
  * @author Usuario
  */
 public class Producto {
+    
+    
+    
     private double precio;
     private String nombre;
+    private static int cafeUsado;
+    private static int lecheUsado;
+    private static int azucarUsado;
+    private static int sacarinaUsado;
+    private static int chocolateUsado;
     
     Producto(){
     }
@@ -19,6 +27,7 @@ public class Producto {
     Producto(String nombre, double precio){
         this.precio = precio;
         this.nombre = nombre;
+        
     }
 
     public double getPrecio() {

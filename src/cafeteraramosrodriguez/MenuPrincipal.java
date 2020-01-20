@@ -19,7 +19,8 @@ public class MenuPrincipal {
         this.zonaAdministrador = new ZonaAdmin();
     }
 
-    public static void ejecucion() {
+    public void ejecucion() {
+       
         Scanner teclado = new Scanner(System.in);
         do {
             boolean repetir = true;
@@ -29,10 +30,10 @@ public class MenuPrincipal {
                 int eleccion = teclado.nextInt();
                 teclado.nextLine();
                 if (eleccion == 1) {
-                    MenuPrincipal.admin();
+                    this.admin();
                     repetir = false;
                 } else if (eleccion == 2) {
-                    MenuPrincipal.comprador();
+                    this.comprador();
                     repetir = false;
                 } else {
                     System.out.println("Has elegido un número incorrecto. Inténtelo de nuevo."
@@ -58,16 +59,16 @@ public class MenuPrincipal {
                 int seleccion = teclado.nextInt();
                 switch (seleccion) {
                     case 1:
-                        menuAdministrador.comprobarDepositos();
+                        zonaAdministrador.comprobarDepositos();
                         break;
                     case 2:
-                        menuAdministrador.comprobarEstadoGeneral();
+                        zonaAdministrador.comprobarEstadoGeneral();
                         break;
                     case 3:
-                        menuAdministrador.consultarSaldo();
+                        zonaAdministrador.consultarSaldo();
                         break;
                     case 4:
-                        menuAdministrador.rellenarDepositos();
+                        zonaAdministrador.rellenarDepositos();
                         break;
                     default:
                         System.out.println("Número incorrecto.");
@@ -91,7 +92,7 @@ public class MenuPrincipal {
         }
     }
 
-    public static void comprador() {
+    public void comprador() {
 
     }
 

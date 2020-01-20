@@ -12,26 +12,41 @@ import java.util.Scanner;
  * @author david
  */
 public class ZonaAdmin {
+
     private String nombreUsuario;
     private String contraseniaUsuario;
     Scanner teclado = new Scanner(System.in);
-    
-    public ZonaAdmin(){
+
+    public ZonaAdmin() {
         this.nombreUsuario = "pepito";
         this.contraseniaUsuario = "1daw";
     }
-    
-    public boolean loggear(){
+
+    public boolean loggear() {
         System.out.println("¿Cuál es el nombre de usuario?");
         String nombre = teclado.nextLine();
         System.out.println("¿Y la contrasenia?");
         String contrasenia = teclado.nextLine();
-        if (nombre.equals(this.nombreUsuario) && contrasenia.equals(this.contraseniaUsuario)){
+        if (nombre.equals(this.nombreUsuario) && contrasenia.equals(this.contraseniaUsuario)) {
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
+    }
+
+    public void comprobarDepositos() {
+
+    }
+
+    public void comprobarEstadoGeneral() {
+
     }
     
-    public void comprobarDepositos(){
+    public void consultarSaldo(){
+        
+    }
+    
+    public void rellenarDepositos(){
         
     }
 }
