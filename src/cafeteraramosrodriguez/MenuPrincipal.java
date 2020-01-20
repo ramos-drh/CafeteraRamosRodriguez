@@ -12,20 +12,28 @@ import java.util.Scanner;
  * @author Usuario
  */
 public class MenuPrincipal {
+    
+    ZonaAdmin zonaAdministrador;
+    
+    public MenuPrincipal(){
+        this.zonaAdministrador = new ZonaAdmin();
+    }
 
     public static void ejecucion() {
         Scanner teclado = new Scanner(System.in);
         do {
+            boolean repetir = true;
             System.out.println("Bienvenido a la cafetera. Presione 1 para zona administrador, o 2"
                     + "para zona de comprador.");
-            boolean repetir = true;
             do {
                 int eleccion = teclado.nextInt();
                 teclado.nextLine();
                 if (eleccion == 1) {
                     MenuPrincipal.admin();
+                    repetir = false;
                 } else if (eleccion == 2) {
                     MenuPrincipal.comprador();
+                    repetir = false;
                 } else {
                     System.out.println("Has elegido un número incorrecto. Inténtelo de nuevo."
                             + "\nPresione 1 para zona administrador, o 2 para zona de comprador.");
@@ -35,10 +43,9 @@ public class MenuPrincipal {
 
     }
 
-    public static void admin() {
+    public void admin() {
         Scanner teclado = new Scanner(System.in);
-        ZonaAdmin menuAdministrador = new ZonaAdmin();
-        if (!menuAdministrador.loggear()) {
+        if (!this.zonaAdministrador.loggear()) {
             System.out.println("El logging ha fallado. Volviendo al menú principal.");
         } else {
             boolean repetir = false;
@@ -81,7 +88,6 @@ public class MenuPrincipal {
                 }
 
             } while (repetir);
-
         }
     }
 

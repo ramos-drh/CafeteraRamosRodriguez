@@ -30,4 +30,8 @@ public class ZonaAdmin {
             return true;
         } else return false;
     }
+    
+    public void comprobarDepositos(){
+        
+    }
 }
