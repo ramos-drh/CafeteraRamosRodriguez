@@ -35,7 +35,8 @@ public class ZonaAdmin {
     }
 
     public void comprobarDepositos() {
-
+        System.out.println("- COMPROBACIÓN DE DEPÓSITOS -");
+        System.out.println(Deposito.advertenciaUmbral());
     }
 
     public void comprobarEstadoGeneral() {
