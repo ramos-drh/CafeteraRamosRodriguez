@@ -7,26 +7,100 @@ package cafeteraramosrodriguez;
 
 /**
  *
- * @author Usuario
+ * @author juan
  */
 public class Deposito {
-    Producto [] catalogo;
+    private static int cafe;
+    private static int leche;
+    private static int azucar;
+    private static int sacarina;
+    private static int chocolate;
 
     public Deposito() {
-        this.catalogo = new Producto[6];
-        catalogo[0].setNombre("Café solo");
-        catalogo[0].setPrecio(0.80);
-        catalogo[1].setNombre("Solo largo");
-        catalogo[1].setPrecio(0.90);
-        catalogo[2].setNombre("Con leche");
-        catalogo[2].setPrecio(1.10);
-        catalogo[3].setNombre("Cortado");
-        catalogo[3].setPrecio(1.0);
-        catalogo[4].setNombre("Chocolate");
-        catalogo[4].setPrecio(1.40);
-        catalogo[5].setNombre("Leche fría o caliente");
-        catalogo[5].setPrecio(0.50);
+        cafe = 100;
+        leche = 100;
+        azucar = 100;
+        sacarina = 100;
+        chocolate = 100;
     }
     
+    public static void reducirCafe(int reduccion){
+        cafe -= reduccion;
+    }
     
+    public static void reducirLeche(int reduccion){
+        leche -= reduccion;
+    }
+    
+    public static void reducirAzucar(int reduccion){
+        azucar -= reduccion;
+    }
+    
+    public static void reducirSacarina(int reduccion){
+        sacarina -= reduccion;
+    }
+    
+    public static void reducirChocolate(int reduccion){
+        chocolate -= reduccion;
+    }
+    
+    public static void aumentarCafe(int aumento){
+        cafe += aumento;
+    }
+    
+    public static void aumentarLeche(int aumento){
+        leche += aumento;
+    }
+    
+    public static void aumentarAzucar(int aumento){
+        azucar += aumento;
+    }
+    
+    public static void aumentarSacarina(int aumento){
+        sacarina += aumento;
+    }
+    
+    public static void aumentarChocolate(int aumento){
+        chocolate += aumento;
+    }
+    
+    public static int getCafe() {
+        return cafe;
+    }
+
+    public static void setCafe(int cafe) {
+        Deposito.cafe = cafe;
+    }
+
+    public static int getLeche() {
+        return leche;
+    }
+
+    public static void setLeche(int leche) {
+        Deposito.leche = leche;
+    }
+
+    public static int getAzucar() {
+        return azucar;
+    }
+
+    public static void setAzucar(int azucar) {
+        Deposito.azucar = azucar;
+    }
+
+    public static int getSacarina() {
+        return sacarina;
+    }
+
+    public static void setSacarina(int sacarina) {
+        Deposito.sacarina = sacarina;
+    }
+
+    public static int getChocolate() {
+        return chocolate;
+    }
+
+    public static void setChocolate(int chocolate) {
+        Deposito.chocolate = chocolate;
+    }
 }
