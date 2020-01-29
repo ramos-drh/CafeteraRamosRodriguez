@@ -97,31 +97,67 @@ public class MenuPrincipal {
         //Primero solicitará dinero para poder empezar;
         //Sigue pidiendo hasta alcanzar como mínimo el precio del producto + barato
         Scanner teclado = new Scanner(System.in);
+        boolean volverMenuPrincipal = false;    //Para volver al menú principal
+        boolean volverMenuVenta = false;
+        int codigoSeleccionado, anadirCantidad;              //Selección del producto; selección aumentar saldo
         
-        System.out.println("Introduzca dinero (céntimos) para poder operar.");
-        zonaCli.setSaldoCliente(zonaCli.getSaldoCliente() + teclado.nextInt());
-        //Lectura adelantada para poder poner un sout diferente en cada iteración del bucle,
-        //informando del saldo actual
-
-        while(zonaCli.getSaldoCliente() < Producto.LECHE.getPrecio()){
-            System.out.println("Introduzca mínimo 50 céntimos para poder operar.\n"
-                    + "Saldo actual: " + zonaCli.getSaldoCliente());
+        do{
+        
+            System.out.println("Introduzca dinero (céntimos) para poder operar.");
             zonaCli.setSaldoCliente(zonaCli.getSaldoCliente() + teclado.nextInt());
-        }
-        //Habría que cambiar la condición de salida si se introduce un producto más barato que la leche
+            //Lectura adelantada para poder poner un sout diferente en cada iteración del bucle,
+            //informando del saldo actual
+            // MEJORAR EXCEPCIÓN LECTURA
+
+            while(zonaCli.getSaldoCliente() < Producto.LECHE.getPrecio()){
+                System.out.println("Introduzca mínimo 50 céntimos para poder operar.\n"
+                        + "Saldo actual: " + zonaCli.getSaldoCliente());
+                zonaCli.setSaldoCliente(zonaCli.getSaldoCliente() + teclado.nextInt());
+                // MEJORAR EXCEPCIÓN LECTURA
+            }
+            //Habría que cambiar la condición de salida si se introduce un producto más barato que la leche
+
+            //Mostramos los productos, sus precios y sus códigos MEJORAR ESTILO OUTPUT
+            //Leemos hasta que el código introducido sea válido (1-6)
+            do{
+                System.out.println("- MENÚ DE VENTA -");
+                System.out.println
+                        ("Código: " + Producto.CAFE_SOLO.getCodigo()+ " " + Producto.CAFE_SOLO.getNombre() + " Precio: " + Producto.CAFE_SOLO.getPrecio() + " céntimos\n"
+                        + "Código: " + Producto.CHOCOLATE.getCodigo() + " " + Producto.CHOCOLATE.getNombre() + " Precio: " + Producto.CHOCOLATE.getPrecio() + " céntimos\n"
+                        + "Código: " + Producto.CON_LECHE.getCodigo() + " " + Producto.CON_LECHE.getNombre() + " Precio: " + Producto.CON_LECHE.getPrecio() + " céntimos\n"
+                        + "Código: " + Producto.CORTADO.getCodigo() + " " +  Producto.CORTADO.getNombre() + " Precio: " + Producto.CORTADO.getPrecio() + " céntimos\n"
+                        + "Código: " + Producto.LECHE.getCodigo() + " " +  Producto.LECHE.getNombre() + " Precio: " + Producto.LECHE.getPrecio() + " céntimos\n"
+                        + "Código: " + Producto.SOLO_LARGO.getCodigo() + " " +  Producto.SOLO_LARGO.getNombre() + " Precio: " + Producto.SOLO_LARGO.getPrecio() + "céntimos");
+
+                System.out.println("Introduzca uno de los códigos: ");
+                codigoSeleccionado = teclado.nextInt();
+            } while(codigoSeleccionado < 1 || codigoSeleccionado > 6);
+            
+            //Si no tiene saldo suficiente => Avisar y preguntar si quiere introd + dinero O Volver a Menu Venta
+            if(zonaCli.getSaldoCliente() < Producto.productoDelCodigo(codigoSeleccionado).getPrecio()){
+                do{
+                    System.out.println("El saldo actual (" + zonaCli.getSaldoCliente() + " céntimos) no es suficiente para el del producto seleccionado (" + Producto.productoDelCodigo(codigoSeleccionado).getPrecio()+ " céntimos)\n"
+                            + "Pulse 0 si desea volver al menú de ventas o"
+                            + "Introduzca la cantidad a añadir para el producto seleccionado:");
+                    anadirCantidad = teclado.nextInt();
+                    if(anadirCantidad > 0){
+                        zonaCli.setSaldoCliente(zonaCli.getSaldoCliente() + anadirCantidad);
+                    }   else if(anadirCantidad == 0){
+                        volverMenuVenta = true;
+                    }
+                }while(volverMenuVenta || zonaCli.getSaldoCliente() < Producto.productoDelCodigo(codigoSeleccionado).getPrecio());
+                
+            }   else{
+                //Comprobar que hay suf producto
+                
+                //Si no => Informa && vuelve a menú ventas
+                    //Si sí => Pregunta cant azucar
+                    //Sirve la bebida (actualizar prod y guardar importe)
+                
+            }
+            
+        }while(volverMenuPrincipal);
         
-        //Mostramos los productos, sus precios y sus códigos MEJORAR ESTILO OUTPUT
-        System.out.println("- MENÚ DE VENTA -");
-        System.out.println
-                ("Código: " + Producto.CAFE_SOLO.getCodigo()+ " " + Producto.CAFE_SOLO.getNombre() + " Precio: " + Producto.CAFE_SOLO.getPrecio() + " céntimos\n"
-                + "Código: " + Producto.CHOCOLATE.getCodigo() + " " + Producto.CHOCOLATE.getNombre() + " Precio: " + Producto.CHOCOLATE.getPrecio() + " céntimos\n"
-                + "Código: " + Producto.CON_LECHE.getCodigo() + " " + Producto.CON_LECHE.getNombre() + " Precio: " + Producto.CON_LECHE.getPrecio() + " céntimos\n"
-                + "Código: " + Producto.CORTADO.getCodigo() + " " +  Producto.CORTADO.getNombre() + " Precio: " + Producto.CORTADO.getPrecio() + " céntimos\n"
-                + "Código: " + Producto.LECHE.getCodigo() + " " +  Producto.LECHE.getNombre() + " Precio: " + Producto.LECHE.getPrecio() + " céntimos\n"
-                + "Código: " + Producto.SOLO_LARGO.getCodigo() + " " +  Producto.SOLO_LARGO.getNombre() + " Precio: " + Producto.SOLO_LARGO.getPrecio() + "céntimos");
-        /*- Modificación del main
-        - Instanciación zonaCliente
-        - comprador(): Pedir saldo mínimo y mostrar menú productos*/
     }
 
     public static void main(String[] args) {
