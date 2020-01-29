@@ -9,32 +9,38 @@ package cafeteraramosrodriguez;
  *
  * @author Usuario
  */
-public class Producto {
-    
-    
-    
-    private double precio;
+public enum Producto {
+
+    CAFE_SOLO(80, "Café solo", 100, 0, 0, 0, 50),
+    SOLO_LARGO(90, "Solo largo", 100, 0, 0, 0, 60),
+    CON_LECHE(110, "Con leche", 70, 50, 0, 0, 30),
+    CORTADO(100, "Cortado", 70, 20, 0, 0, 50),
+    CHOCOLATE(140, "Chocolate", 0, 40, 0, 60, 40),
+    LECHE(50, "Leche caliente o fría", 0, 50, 0, 0, 80);
+
+    private int precio;
     private String nombre;
-    private static int cafeUsado;
-    private static int lecheUsado;
-    private static int azucarUsado;
-    private static int sacarinaUsado;
-    private static int chocolateUsado;
-    
-    Producto(){
-    }
-    
-    Producto(String nombre, double precio){
+    private int cafeUsado;
+    private int lecheUsado;
+    private int azucarUsado;
+    private int chocolateUsado;
+    private int aguaUsada;
+
+    private Producto(int precio, String nombre, int cafeUsado, int lecheUsado, int azucarUsado, int chocolateUsado, int aguaUsada) {
         this.precio = precio;
         this.nombre = nombre;
-        
+        this.cafeUsado = cafeUsado;
+        this.lecheUsado = lecheUsado;
+        this.azucarUsado = azucarUsado;
+        this.chocolateUsado = chocolateUsado;
+        this.aguaUsada = aguaUsada;
     }
 
-    public double getPrecio() {
+    public int getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
 
@@ -45,6 +51,44 @@ public class Producto {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    
+
+    public int getCafeUsado() {
+        return cafeUsado;
+    }
+
+    public void setCafeUsado(int cafeUsado) {
+        this.cafeUsado = cafeUsado;
+    }
+
+    public int getLecheUsado() {
+        return lecheUsado;
+    }
+
+    public void setLecheUsado(int lecheUsado) {
+        this.lecheUsado = lecheUsado;
+    }
+
+    public int getAzucarUsado() {
+        return azucarUsado;
+    }
+
+    public void setAzucarUsado(int azucarUsado) {
+        this.azucarUsado = azucarUsado;
+    }
+
+    public int getChocolateUsado() {
+        return chocolateUsado;
+    }
+
+    public void setChocolateUsado(int chocolateUsado) {
+        this.chocolateUsado = chocolateUsado;
+    }
+
+    public int getAguaUsada() {
+        return aguaUsada;
+    }
+
+    public void setAguaUsada(int aguaUsada) {
+        this.aguaUsada = aguaUsada;
+    }
 }

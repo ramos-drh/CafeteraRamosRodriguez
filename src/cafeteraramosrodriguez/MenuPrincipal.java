@@ -12,15 +12,15 @@ import java.util.Scanner;
  * @author Usuario
  */
 public class MenuPrincipal {
-    
+
     ZonaAdmin zonaAdministrador;
-    
-    public MenuPrincipal(){
+
+    public MenuPrincipal() {
         this.zonaAdministrador = new ZonaAdmin();
+        Deposito.inicializarDeposito();
     }
 
     public void ejecucion() {
-       
         Scanner teclado = new Scanner(System.in);
         do {
             boolean repetir = true;
@@ -87,7 +87,6 @@ public class MenuPrincipal {
                         System.out.println("Número incorrecto. Volverá al menú administrador.");
                         repetir = true;
                 }
-
             } while (repetir);
         }
     }
@@ -97,6 +96,6 @@ public class MenuPrincipal {
     }
 
     public static void main(String[] args) {
-        MenuPrincipal.ejecucion();
+        // MenuPrincipal.ejecucion();
     }
 }
