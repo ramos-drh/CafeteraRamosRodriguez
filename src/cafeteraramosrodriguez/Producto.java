@@ -11,12 +11,12 @@ package cafeteraramosrodriguez;
  */
 public enum Producto {
 
-    CAFE_SOLO(80, "Café solo", 100, 0, 0, 0, 50),
-    SOLO_LARGO(90, "Solo largo", 100, 0, 0, 0, 60),
-    CON_LECHE(110, "Con leche", 70, 50, 0, 0, 30),
-    CORTADO(100, "Cortado", 70, 20, 0, 0, 50),
-    CHOCOLATE(140, "Chocolate", 0, 40, 0, 60, 40),
-    LECHE(50, "Leche caliente o fría", 0, 50, 0, 0, 80);
+    CAFE_SOLO(80, "Café solo", 100, 0, 0, 0, 50, 1),
+    SOLO_LARGO(90, "Solo largo", 100, 0, 0, 0, 60, 2),
+    CON_LECHE(110, "Con leche", 70, 50, 0, 0, 30, 3),
+    CORTADO(100, "Cortado", 70, 20, 0, 0, 50, 4),
+    CHOCOLATE(140, "Chocolate", 0, 40, 0, 60, 40, 5),
+    LECHE(50, "Leche caliente o fría", 0, 50, 0, 0, 80, 6);
 
     private int precio;
     private String nombre;
@@ -25,8 +25,9 @@ public enum Producto {
     private int azucarUsado;
     private int chocolateUsado;
     private int aguaUsada;
+    private int codigo;     //Serán un int 1-N (N nº de productos, 6), aunque creo que no es la mejor opción
 
-    private Producto(int precio, String nombre, int cafeUsado, int lecheUsado, int azucarUsado, int chocolateUsado, int aguaUsada) {
+    private Producto(int precio, String nombre, int cafeUsado, int lecheUsado, int azucarUsado, int chocolateUsado, int aguaUsada, int codigo) {
         this.precio = precio;
         this.nombre = nombre;
         this.cafeUsado = cafeUsado;
@@ -34,6 +35,7 @@ public enum Producto {
         this.azucarUsado = azucarUsado;
         this.chocolateUsado = chocolateUsado;
         this.aguaUsada = aguaUsada;
+        this.codigo = codigo;
     }
 
     public int getPrecio() {
@@ -91,4 +93,15 @@ public enum Producto {
     public void setAguaUsada(int aguaUsada) {
         this.aguaUsada = aguaUsada;
     }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    //Creo que no es necesario
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+    
+    
 }
