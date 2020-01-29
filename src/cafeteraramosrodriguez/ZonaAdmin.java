@@ -40,7 +40,13 @@ public class ZonaAdmin {
     }
 
     public void comprobarEstadoGeneral() {
-
+        System.out.println("Nombre de usuario: " + this.nombreUsuario);
+        System.out.println("Contraseña: " + this.contraseniaUsuario);
+        System.out.println("Cantidad de café: " + Deposito.getCafe());
+        System.out.println("Cantidad de leche: " + Deposito.getLeche());
+        System.out.println("Cantidad de azúcar: " + Deposito.getAzucar());
+        System.out.println("Cantidad de chocolate: " + Deposito.getChocolate());
+        System.out.println("Cantidad de agua: " + Deposito.getAgua());
     }
     
     public void consultarSaldo(){

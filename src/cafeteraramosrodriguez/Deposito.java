@@ -15,7 +15,7 @@ public class Deposito {
     private static int azucar;
     private static int chocolate;
     private static int agua;
-    private static int umbral;
+    private static final int UMBRAL = 400;
 
     public Deposito() {
     }
@@ -26,24 +26,23 @@ public class Deposito {
         azucar = 2000;
         chocolate = 2000;
         agua = 2000;
-        umbral = 400;
     }
     
     public static String advertenciaUmbral(){
         String advertencia = "";
-        if (cafe < umbral){
+        if (cafe < UMBRAL){
             advertencia+= "\t - Café está a " + Integer.toString(cafe) + "\n";
         }
-        if (leche < umbral){
+        if (leche < UMBRAL){
             advertencia+= "\t - Leche está a " + Integer.toString(leche) + "\n";
         }
-        if (azucar < umbral){
+        if (azucar < UMBRAL){
             advertencia+= "\t - Azúcar está a " + Integer.toString(azucar) + "\n";
         }
-        if (chocolate < umbral){
+        if (chocolate < UMBRAL){
             advertencia+= "\t - Chocolate está a " + Integer.toString(chocolate) + "\n";
         }
-        if (agua < umbral){
+        if (agua < UMBRAL){
             advertencia+= "\t - Agua está a " + Integer.toString(agua) + "\n";
         }
         if (advertencia.equals("")){
@@ -115,5 +114,17 @@ public class Deposito {
 
     public static void setChocolate(int chocolate) {
         Deposito.chocolate = chocolate;
+    }
+
+    public static int getAgua() {
+        return agua;
+    }
+
+    public static void setAgua(int agua) {
+        Deposito.agua = agua;
+    }
+
+    public static int getUmbral() {
+        return UMBRAL;
     }
 }
