@@ -16,6 +16,7 @@ public class ZonaAdmin {
     private String nombreUsuario;
     private String contraseniaUsuario;
     Scanner teclado = new Scanner(System.in);
+    private static int saldo;
 
     public ZonaAdmin() {
         this.nombreUsuario = "pepito";
@@ -40,6 +41,7 @@ public class ZonaAdmin {
     }
 
     public void comprobarEstadoGeneral() {
+        System.out.println(" - COMPROBAR ESTADO GENERAL - ");
         System.out.println("Nombre de usuario: " + this.nombreUsuario);
         System.out.println("Contraseña: " + this.contraseniaUsuario);
         System.out.println("Cantidad de café: " + Deposito.getCafe());
@@ -48,12 +50,68 @@ public class ZonaAdmin {
         System.out.println("Cantidad de chocolate: " + Deposito.getChocolate());
         System.out.println("Cantidad de agua: " + Deposito.getAgua());
     }
-    
-    public void consultarSaldo(){
-        
+
+    public void consultarSaldo() {
+        System.out.println(" - CONSULTAR SALDO - ");
+        System.out.println("El saldo actual es: " + saldo);
     }
-    
-    public void rellenarDepositos(){
-        
+
+    public void rellenarDepositos() {
+        System.out.println(" - RELLENAR DEPOSITOS - ");
+        boolean repetir = true;
+        do {
+            System.out.println("¿Cuál quieres rellenar?"
+                    + " 1. Café"
+                    + " 2. Leche"
+                    + " 3. Azúcar"
+                    + " 4. Chocolate"
+                    + " 5. Agua");
+            int eleccion = teclado.nextInt();
+            teclado.nextLine();
+            
+            switch (eleccion){
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                default:
+                    System.out.println("Número fuera del rango.");
+            }
+            System.out.println("Presiona 1 para salir. Presiona 2 para rellenar otro depósito.");
+            int salir = teclado.nextInt();
+            if (salir == 1){
+                repetir = false;
+            }
+        } while (repetir);
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getContraseniaUsuario() {
+        return contraseniaUsuario;
+    }
+
+    public void setContraseniaUsuario(String contraseniaUsuario) {
+        this.contraseniaUsuario = contraseniaUsuario;
+    }
+
+    public static int getSaldo() {
+        return saldo;
+    }
+
+    public static void setSaldo(int saldo) {
+        ZonaAdmin.saldo = saldo;
     }
 }

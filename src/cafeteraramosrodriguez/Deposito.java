@@ -5,6 +5,8 @@
  */
 package cafeteraramosrodriguez;
 
+import java.util.Scanner;
+
 /**
  *
  * @author juan
@@ -15,17 +17,18 @@ public class Deposito {
     private static int azucar;
     private static int chocolate;
     private static int agua;
+    private static final int MAXIMO = 2000;
     private static final int UMBRAL = 400;
 
     public Deposito() {
     }
     
     public static void inicializarDeposito(){
-        cafe = 2000;
-        leche = 2000;
-        azucar = 2000;
-        chocolate = 2000;
-        agua = 2000;
+        cafe = MAXIMO;
+        leche = MAXIMO;
+        azucar = MAXIMO;
+        chocolate = MAXIMO;
+        agua = MAXIMO;
     }
     
     public static String advertenciaUmbral(){
@@ -49,6 +52,59 @@ public class Deposito {
             advertencia = "Están todos por encima del umbral.";
         }
         return advertencia;
+    }
+    
+    public static void rellenarCantidad (int eleccion){
+        Scanner teclado = new Scanner (System.in);
+        System.out.println("Presiona 1 para rellenar al completo. Presiona 2 para rellenar parcialmente: ");
+        int eleccionRelleno = teclado.nextInt();
+        teclado.nextLine();
+        
+        if (eleccionRelleno == 1){
+            switch (eleccion){
+                case 1:
+                    cafe = MAXIMO;
+                    break;
+                case 2:
+                    leche = MAXIMO;
+                    break;
+                case 3:
+                    azucar = MAXIMO;
+                    break;
+                case 4:
+                    chocolate = MAXIMO;
+                    break;
+                case 5:
+                    agua = MAXIMO;
+                    break;
+            }
+        } else if (eleccionRelleno == 2){
+            System.out.println("¿Por cuánto lo quieres rellenar? La capacidad máxima es " + MAXIMO);
+            int cantidad = teclado.nextInt();
+            teclado.nextLine();
+            switch(eleccion){
+                case 1:
+                    cafe += cantidad;
+                    cafe = (cafe>2000) ? 2000 : cafe;
+                    break;
+                case 2:
+                    leche += cantidad;
+                    leche = (leche>2000) ? 2000 : leche;
+                    break;
+                case 3:
+                    azucar += cantidad;
+                    azucar = (azucar>2000) ? 2000 : azucar;
+                    break;
+                case 4:
+                    chocolate += cantidad;
+                    chocolate = (chocolate>2000) ? 2000 : chocolate;
+                    break;
+                case 5:
+                    agua += cantidad;
+                    agua = (agua>2000) ? 2000 : agua;
+                    break;
+            }
+        }
     }
     
     public static void reducirCafe(int reduccion){
