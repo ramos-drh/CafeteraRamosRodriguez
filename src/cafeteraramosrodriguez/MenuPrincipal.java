@@ -14,9 +14,11 @@ import java.util.Scanner;
 public class MenuPrincipal {
 
     ZonaAdmin zonaAdministrador;
+    ZonaCliente zonaCli;
 
     public MenuPrincipal() {
         this.zonaAdministrador = new ZonaAdmin();
+        this.zonaCli = new ZonaCliente();
         Deposito.inicializarDeposito();
     }
 
@@ -25,7 +27,7 @@ public class MenuPrincipal {
         do {
             boolean repetir = true;
             System.out.println("Bienvenido a la cafetera. Presione 1 para zona administrador, o 2"
-                    + "para zona de comprador.");
+                    + " para zona de comprador.");
             do {
                 int eleccion = teclado.nextInt();
                 teclado.nextLine();
@@ -92,10 +94,39 @@ public class MenuPrincipal {
     }
 
     public void comprador() {
+        //Primero solicitará dinero para poder empezar;
+        //Sigue pidiendo hasta alcanzar como mínimo el precio del producto + barato
+        Scanner teclado = new Scanner(System.in);
+        
+        System.out.println("Introduzca dinero (céntimos) para poder operar.");
+        zonaCli.setSaldoCliente(zonaCli.getSaldoCliente() + teclado.nextInt());
+        //Lectura adelantada para poder poner un sout diferente en cada iteración del bucle,
+        //informando del saldo actual
 
+        while(zonaCli.getSaldoCliente() < Producto.LECHE.getPrecio()){
+            System.out.println("Introduzca mínimo 50 céntimos para poder operar.\n"
+                    + "Saldo actual: " + zonaCli.getSaldoCliente());
+            zonaCli.setSaldoCliente(zonaCli.getSaldoCliente() + teclado.nextInt());
+        }
+        //Habría que cambiar la condición de salida si se introduce un producto más barato que la leche
+        
+        //Mostramos los productos, sus precios y sus códigos MEJORAR ESTILO OUTPUT
+        System.out.println("- MENÚ DE VENTA -");
+        System.out.println
+                ("Código: " + Producto.CAFE_SOLO.getCodigo()+ " " + Producto.CAFE_SOLO.getNombre() + " Precio: " + Producto.CAFE_SOLO.getPrecio() + " céntimos\n"
+                + "Código: " + Producto.CHOCOLATE.getCodigo() + " " + Producto.CHOCOLATE.getNombre() + " Precio: " + Producto.CHOCOLATE.getPrecio() + " céntimos\n"
+                + "Código: " + Producto.CON_LECHE.getCodigo() + " " + Producto.CON_LECHE.getNombre() + " Precio: " + Producto.CON_LECHE.getPrecio() + " céntimos\n"
+                + "Código: " + Producto.CORTADO.getCodigo() + " " +  Producto.CORTADO.getNombre() + " Precio: " + Producto.CORTADO.getPrecio() + " céntimos\n"
+                + "Código: " + Producto.LECHE.getCodigo() + " " +  Producto.LECHE.getNombre() + " Precio: " + Producto.LECHE.getPrecio() + " céntimos\n"
+                + "Código: " + Producto.SOLO_LARGO.getCodigo() + " " +  Producto.SOLO_LARGO.getNombre() + " Precio: " + Producto.SOLO_LARGO.getPrecio() + "céntimos");
+        /*- Modificación del main
+        - Instanciación zonaCliente
+        - comprador(): Pedir saldo mínimo y mostrar menú productos*/
     }
 
     public static void main(String[] args) {
-        // MenuPrincipal.ejecucion();
+        MenuPrincipal menu = new MenuPrincipal();
+        
+        menu.ejecucion();
     }
 }
