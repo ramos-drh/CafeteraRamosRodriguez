@@ -13,15 +13,43 @@ public class Deposito {
     private static int cafe;
     private static int leche;
     private static int azucar;
-    private static int sacarina;
     private static int chocolate;
+    private static int agua;
+    private static int umbral;
 
     public Deposito() {
-        cafe = 100;
-        leche = 100;
-        azucar = 100;
-        sacarina = 100;
-        chocolate = 100;
+    }
+    
+    public static void inicializarDeposito(){
+        cafe = 2000;
+        leche = 2000;
+        azucar = 2000;
+        chocolate = 2000;
+        agua = 2000;
+        umbral = 400;
+    }
+    
+    public static String advertenciaUmbral(){
+        String advertencia = "";
+        if (cafe < umbral){
+            advertencia+= "\t - Café está a " + Integer.toString(cafe) + "\n";
+        }
+        if (leche < umbral){
+            advertencia+= "\t - Leche está a " + Integer.toString(leche) + "\n";
+        }
+        if (azucar < umbral){
+            advertencia+= "\t - Azúcar está a " + Integer.toString(azucar) + "\n";
+        }
+        if (chocolate < umbral){
+            advertencia+= "\t - Chocolate está a " + Integer.toString(chocolate) + "\n";
+        }
+        if (agua < umbral){
+            advertencia+= "\t - Agua está a " + Integer.toString(agua) + "\n";
+        }
+        if (advertencia.equals("")){
+            advertencia = "Están todos por encima del umbral.";
+        }
+        return advertencia;
     }
     
     public static void reducirCafe(int reduccion){
@@ -34,10 +62,6 @@ public class Deposito {
     
     public static void reducirAzucar(int reduccion){
         azucar -= reduccion;
-    }
-    
-    public static void reducirSacarina(int reduccion){
-        sacarina -= reduccion;
     }
     
     public static void reducirChocolate(int reduccion){
@@ -54,10 +78,6 @@ public class Deposito {
     
     public static void aumentarAzucar(int aumento){
         azucar += aumento;
-    }
-    
-    public static void aumentarSacarina(int aumento){
-        sacarina += aumento;
     }
     
     public static void aumentarChocolate(int aumento){
@@ -88,13 +108,6 @@ public class Deposito {
         Deposito.azucar = azucar;
     }
 
-    public static int getSacarina() {
-        return sacarina;
-    }
-
-    public static void setSacarina(int sacarina) {
-        Deposito.sacarina = sacarina;
-    }
 
     public static int getChocolate() {
         return chocolate;
