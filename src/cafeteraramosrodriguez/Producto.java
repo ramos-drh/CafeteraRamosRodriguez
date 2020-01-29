@@ -103,5 +103,26 @@ public enum Producto {
         this.codigo = codigo;
     }
     
+    public static Producto productoDelCodigo(int codigo){
+        
+        //El código está seguro entre 1-6 porque se comprueba antes de llamar al método
+        // => nunca entrará en default, pero lo tengo que poner porque sino da error (may not have been inizialited)
+        switch(codigo){
+            case 1:
+                return Producto.CAFE_SOLO;
+            case 2:
+                return Producto.SOLO_LARGO;
+            case 3:
+                return Producto.CON_LECHE;
+            case 4:
+                return Producto.CORTADO;
+            case 5:
+                return Producto.CHOCOLATE;
+            case 6:
+                return Producto.LECHE;
+            default:
+                return null;
+        }
+    }
     
 }
