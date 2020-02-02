@@ -100,84 +100,93 @@ public class MenuPrincipal {
         boolean volverMenuPrincipal = false;    //Para volver al menú principal
         boolean volverMenuVenta;
         int codigoSeleccionado, anadirCantidad;              //Selección del producto; selección aumentar saldo
-        
-        do{
-            //Inicializamos el saldo del Cliente
-            zonaCli.setSaldoCliente(0);
+        do {
             System.out.println("Introduzca dinero (céntimos) para poder operar.");
-            zonaCli.setSaldoCliente(zonaCli.getSaldoCliente() + teclado.nextInt());
+            zonaCli.setSaldoCliente(teclado.nextInt());
             //Lectura adelantada para poder poner un sout diferente en cada iteración del bucle,
             //informando del saldo actual
-            // MEJORAR EXCEPCIÓN LECTURA
-
-            while(zonaCli.getSaldoCliente() < Producto.LECHE.getPrecio()){
-                System.out.println("Introduzca mínimo 50 céntimos para poder operar.\n"
-                        + "Saldo actual: " + zonaCli.getSaldoCliente());
+            while (zonaCli.getSaldoCliente() < Producto.LECHE.getPrecio()) {
+                System.out.println("Se necesitan mínimo 50 céntimos para poder operar.\n"
+                        + "Saldo actual: " + zonaCli.saldoEuros()
+                        + "\nPor favor, introduzca más:");
                 zonaCli.setSaldoCliente(zonaCli.getSaldoCliente() + teclado.nextInt());
-                // MEJORAR EXCEPCIÓN LECTURA
             }
             //Habría que cambiar la condición de salida si se introduce un producto más barato que la leche
-            do{
+            do {
                 //Mostramos los productos, sus precios y sus códigos MEJORAR ESTILO OUTPUT
                 //Leemos hasta que el código introducido sea válido (1-6)
-                do{
-                    volverMenuVenta = false; 
-                    System.out.println("- MENÚ DE VENTA -");
-                    System.out.println
-                            ("Código: " + Producto.CAFE_SOLO.getCodigo()+ " " + Producto.CAFE_SOLO.getNombre() + " Precio: " + Producto.CAFE_SOLO.getPrecio() + " céntimos\n"
-                            + "Código: " + Producto.CHOCOLATE.getCodigo() + " " + Producto.CHOCOLATE.getNombre() + " Precio: " + Producto.CHOCOLATE.getPrecio() + " céntimos\n"
-                            + "Código: " + Producto.CON_LECHE.getCodigo() + " " + Producto.CON_LECHE.getNombre() + " Precio: " + Producto.CON_LECHE.getPrecio() + " céntimos\n"
-                            + "Código: " + Producto.CORTADO.getCodigo() + " " +  Producto.CORTADO.getNombre() + " Precio: " + Producto.CORTADO.getPrecio() + " céntimos\n"
-                            + "Código: " + Producto.LECHE.getCodigo() + " " +  Producto.LECHE.getNombre() + " Precio: " + Producto.LECHE.getPrecio() + " céntimos\n"
-                            + "Código: " + Producto.SOLO_LARGO.getCodigo() + " " +  Producto.SOLO_LARGO.getNombre() + " Precio: " + Producto.SOLO_LARGO.getPrecio() + " céntimos");
-
+                System.out.println("- MENÚ DE VENTA -");
+                do {
+                    volverMenuVenta = false;
+                    System.out.println(Producto.CAFE_SOLO.toString() + "\n"
+                            + Producto.CHOCOLATE.toString() + "\n"
+                            + Producto.CON_LECHE.toString() + "\n"
+                            + Producto.CORTADO.toString() + "\n"
+                            + Producto.LECHE.toString() + "\n"
+                            + Producto.SOLO_LARGO.toString());
                     System.out.println("Introduzca uno de los códigos: ");
                     codigoSeleccionado = teclado.nextInt();
-                } while(codigoSeleccionado < 1 || codigoSeleccionado > 6);
+                    if (codigoSeleccionado < 1 || codigoSeleccionado > 6) {
+                        System.out.println("Código incorrecto. Inténtelo de nuevo");
+                    }
+                } while (codigoSeleccionado < 1 || codigoSeleccionado > 6);
 
                 //Entra si no tiene saldo suficiente
-                if(zonaCli.getSaldoCliente() < Producto.productoDelCodigo(codigoSeleccionado).getPrecio()){
-                     //Avisa y pregunta si quiere introducir + dinero O Volver a Menu Venta
-                    do{
+                if (zonaCli.getSaldoCliente() < Producto.productoDelCodigo(codigoSeleccionado).getPrecio()) {
+                    //Avisa y pregunta si quiere introducir + dinero O Volver a Menu Venta
+                    do {
                         //Se repite mientras el saldo siga siendo insuficiente & no pulse volver menú ventas
-                        System.out.println("El saldo actual (" + zonaCli.getSaldoCliente() + " céntimos) no es suficiente para el del producto seleccionado (" + Producto.productoDelCodigo(codigoSeleccionado).getPrecio()+ " céntimos)\n"
+                        System.out.println("El saldo actual (" + zonaCli.saldoEuros() + "€) no es suficiente para el del producto seleccionado (" + (Producto.productoDelCodigo(codigoSeleccionado).getPrecio() / 100) + "€)\n"
                                 + "Pulse 0 si desea volver al menú de ventas o \n"
                                 + "Introduzca la cantidad a añadir (>0) para el producto seleccionado:");
                         anadirCantidad = teclado.nextInt();
-                        if(anadirCantidad > 0){
+                        if (anadirCantidad > 0) {
                             zonaCli.setSaldoCliente(zonaCli.getSaldoCliente() + anadirCantidad);
-                        }   else if(anadirCantidad == 0){
+                        } else if (anadirCantidad == 0) {
                             volverMenuVenta = true;
                         }
-                    }while(!volverMenuVenta && !(zonaCli.getSaldoCliente() >= Producto.productoDelCodigo(codigoSeleccionado).getPrecio()));
+                    } while (!volverMenuVenta && !(zonaCli.getSaldoCliente() >= Producto.productoDelCodigo(codigoSeleccionado).getPrecio()));
 
-                //Entra aquí cuando el saldo sea suficiene para comprar el prod seleccionado
-                //Y NO haya cantidades suficientes en los DEPÓSITOS
-                } if(!Deposito.depositosSuficientes(codigoSeleccionado)){
+                    //Entra aquí cuando el saldo sea suficiene para comprar el prod seleccionado
+                    //Y NO haya cantidades suficientes en los DEPÓSITOS
+                }
+                if (!Deposito.depositosSuficientes(codigoSeleccionado)) {
                     //Si no hay ingredientes suficientes, vuelve al Menú Ventas
                     System.out.println("Lo sentimos, no hay suficientes ingredientes. Volverá al menú de ventas y podrá elegir otro producto.");
                     volverMenuVenta = true;
-                    
-                //Entra si hay producto suficiente =>                
-                } else{
+                    //Entra si hay producto suficiente =>                
+                } else {
                     int azucarServida;
                     //Pregunta cant azucar y Sirve la bebida (actualizar prod y guardar importe)
-                System.out.println("¿Cuánta azúcar quiere?: \n"
-                        + "0: Ninguna\n"
-                        + "1: Poca\n"
-                        + "2: Mucha\n");
-                azucarServida = teclado.nextInt();
-                Deposito.reducirAzucar(azucarServida*10);
-                //MEJORAR(?) Resta 1 o 2 *10 gramos de azúcar, mejor hacer con un switch y elegir más
-                //elegantemente qué cantidad de azúcar quita 'Poca' y cuánta 'Mucha'
-                Deposito.reducirDepositos(codigoSeleccionado);
-                ZonaAdmin.setSaldo(ZonaAdmin.getSaldo() + zonaCli.getSaldoCliente());
-                volverMenuPrincipal = true;
-            }
-            
-            }while(volverMenuVenta);
-        }while(!volverMenuPrincipal);
-        
+                    System.out.println("¿Cuánta azúcar quiere?: \n"
+                            + "0: Ninguna\n"
+                            + "1: Poca (10 céntimos)\n"
+                            + "2: Mucha (20 céntimos)\n");
+                    azucarServida = teclado.nextInt();
+                    boolean repetir = true;
+                    if (azucarServida > 2 || azucarServida < 0){
+                        azucarServida = 0;
+                    }
+                    while (zonaCli.getSaldoCliente()<azucarServida*10 && repetir){
+                        System.out.println("Requiere " + (((azucarServida*10)-zonaCli.getSaldoCliente())/100) + " más para la compra. Introduzca la diferencia (en céntimos)"
+                                + ", o 0 para cancelar el azúcar:");
+                        int ingreso = teclado.nextInt();
+                        zonaCli.setSaldoCliente(zonaCli.getSaldoCliente() + ingreso);
+                        if (ingreso == 0 || (azucarServida-zonaCli.getSaldoCliente())<=ingreso){
+                            repetir = false;
+                        }  
+                    }
+                    Deposito.reducirAzucar(azucarServida * 10);
+                    Deposito.reducirDepositos(codigoSeleccionado);
+                    ZonaAdmin.setSaldo(ZonaAdmin.getSaldo() + zonaCli.getSaldoCliente());
+                    volverMenuPrincipal = true;
+                }
+            } while (volverMenuVenta);
+        } while (!volverMenuPrincipal);
+        if (zonaCli.getSaldoCliente() > 0) {
+            System.out.println("Se le devolverá " + zonaCli.saldoEuros() + "€");
+            zonaCli.setSaldoCliente(0);
+        }
     }
 
     public static void main(String[] args) {
