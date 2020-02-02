@@ -136,19 +136,20 @@ public class MenuPrincipal {
             //Si no tiene saldo suficiente => Avisar y preguntar si quiere introd + dinero O Volver a Menu Venta
             if(zonaCli.getSaldoCliente() < Producto.productoDelCodigo(codigoSeleccionado).getPrecio()){
                 do{
+                    //Se repite mientras el saldo siga siendo insuficiente & no pulse volver menú ventas
                     System.out.println("El saldo actual (" + zonaCli.getSaldoCliente() + " céntimos) no es suficiente para el del producto seleccionado (" + Producto.productoDelCodigo(codigoSeleccionado).getPrecio()+ " céntimos)\n"
                             + "Pulse 0 si desea volver al menú de ventas o"
-                            + "Introduzca la cantidad a añadir para el producto seleccionado:");
+                            + "Introduzca la cantidad a añadir (>0) para el producto seleccionado:");
                     anadirCantidad = teclado.nextInt();
                     if(anadirCantidad > 0){
                         zonaCli.setSaldoCliente(zonaCli.getSaldoCliente() + anadirCantidad);
                     }   else if(anadirCantidad == 0){
                         volverMenuVenta = true;
                     }
-                }while(volverMenuVenta || zonaCli.getSaldoCliente() < Producto.productoDelCodigo(codigoSeleccionado).getPrecio());
+                }while(!volverMenuVenta || zonaCli.getSaldoCliente() < Producto.productoDelCodigo(codigoSeleccionado).getPrecio());
                 
-            }   else{
-                //Comprobar que hay suf producto
+            }   else if(depositosSuficientes(codigoSeleccionado)){
+                //Comprobar que los ingredientes del producto están > umbral
                 
                 //Si no => Informa && vuelve a menú ventas
                     //Si sí => Pregunta cant azucar

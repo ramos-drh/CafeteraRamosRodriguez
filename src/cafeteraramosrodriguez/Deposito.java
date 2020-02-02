@@ -183,4 +183,22 @@ public class Deposito {
     public static int getUmbral() {
         return UMBRAL;
     }
+    
+    public static boolean depositosSuficientes(int codigo){
+        switch(codigo){
+            case 1:
+            case 6://Cafes solo y Solo largo
+                return (Deposito.cafe > Deposito.UMBRAL && Deposito.agua > Deposito.UMBRAL);
+            case 2://Chocolate
+                return (Deposito.chocolate > Deposito.UMBRAL && Deposito.leche > Deposito.UMBRAL && Deposito.agua > Deposito.UMBRAL);
+            case 3:
+            case 4://Con leche y Cortado
+                return (Deposito.cafe > Deposito.UMBRAL && Deposito.agua > Deposito.UMBRAL && Deposito.leche > Deposito.UMBRAL);
+            case 5://Leche
+                return (Deposito.leche > Deposito.UMBRAL && Deposito.agua > Deposito.UMBRAL);
+            default:
+                //No llegará nunca aquí
+                return false;
+        }
+    }
 }
