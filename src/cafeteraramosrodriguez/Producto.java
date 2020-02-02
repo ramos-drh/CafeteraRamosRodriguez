@@ -124,5 +124,9 @@ public enum Producto {
                 return null;
         }
     }
-    
+
+    @Override
+    public String toString() {
+        return "Código: " + this.getCodigo() + " \tNombre" + this.getNombre() + " \tPrecio: " + (this.getPrecio()/100) + "€";
+    }
 }
