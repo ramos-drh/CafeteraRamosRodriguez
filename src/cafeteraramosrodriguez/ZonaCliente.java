@@ -25,5 +25,7 @@ public class ZonaCliente {
         this.saldoCliente = saldoCliente;
     }
     
-    
+    public double saldoEuros(){
+        return saldoCliente/100;
+    }
 }
