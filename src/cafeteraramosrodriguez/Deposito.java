@@ -123,6 +123,10 @@ public class Deposito {
         chocolate -= reduccion;
     }
     
+    public static void reducirAgua(int reduccion){
+        agua -= reduccion;
+    }
+        
     public static void aumentarCafe(int aumento){
         cafe += aumento;
     }
@@ -137,6 +141,10 @@ public class Deposito {
     
     public static void aumentarChocolate(int aumento){
         chocolate += aumento;
+    }
+    
+    public static void aumentarAgua(int aumento){
+        agua += aumento;
     }
     
     public static int getCafe() {
@@ -199,6 +207,35 @@ public class Deposito {
             default:
                 //No llegará nunca aquí
                 return false;
+        }
+    }
+    
+    public static void reducirDepositos(int codigo){
+        switch(codigo){
+            case 1://Café solo
+                Deposito.reducirCafe(Producto.CAFE_SOLO.getCafeUsado());
+                Deposito.reducirAgua(Producto.CAFE_SOLO.getAguaUsada());
+            case 2://Chocolate
+                Deposito.reducirChocolate(Producto.CHOCOLATE.getChocolateUsado());
+                Deposito.reducirAgua(Producto.CHOCOLATE.getAguaUsada());
+                Deposito.reducirLeche(Producto.CHOCOLATE.getLecheUsado());
+                Deposito.reducirAzucar(Producto.CHOCOLATE.getAzucarUsado());
+            case 3://Con leche
+                Deposito.reducirCafe(Producto.CON_LECHE.getCafeUsado());
+                Deposito.reducirAgua(Producto.CON_LECHE.getAguaUsada());
+                Deposito.reducirLeche(Producto.CON_LECHE.getLecheUsado());
+            case 4://Cortado
+                Deposito.reducirCafe(Producto.CORTADO.getCafeUsado());
+                Deposito.reducirAgua(Producto.CORTADO.getAguaUsada());
+                Deposito.reducirLeche(Producto.CORTADO.getLecheUsado());
+            case 5://Leche
+                Deposito.reducirAgua(Producto.LECHE.getAguaUsada());
+                Deposito.reducirLeche(Producto.LECHE.getLecheUsado());
+            case 6://Café Solo largo
+                Deposito.reducirCafe(Producto.SOLO_LARGO.getCafeUsado());
+                Deposito.reducirAgua(Producto.SOLO_LARGO.getAguaUsada());
+            default:
+                //No llegará nunca aquí
         }
     }
 }
