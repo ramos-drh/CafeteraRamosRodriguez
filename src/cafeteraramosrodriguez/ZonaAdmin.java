@@ -53,7 +53,7 @@ public class ZonaAdmin {
 
     public void consultarSaldo() {
         System.out.println(" - CONSULTAR SALDO - ");
-        System.out.println("El saldo actual es: " + saldo);
+        System.out.println("El saldo actual es: " + (saldo/100.0) + "€");
     }
 
     public void rellenarDepositos() {
@@ -71,14 +71,19 @@ public class ZonaAdmin {
             
             switch (eleccion){
                 case 1:
+                    Deposito.setCafe(Deposito.getMaximo());
                     break;
                 case 2:
+                    Deposito.setLeche(Deposito.getMaximo());
                     break;
                 case 3:
+                    Deposito.setAzucar(Deposito.getMaximo());
                     break;
                 case 4:
+                    Deposito.setChocolate(Deposito.getMaximo());
                     break;
                 case 5:
+                    Deposito.setAgua(Deposito.getMaximo());
                     break;
                 default:
                     System.out.println("Número fuera del rango.");
