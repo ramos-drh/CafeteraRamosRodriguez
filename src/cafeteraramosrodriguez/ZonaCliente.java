@@ -26,6 +26,7 @@ public class ZonaCliente {
     }
     
     public double saldoEuros(){
-        return saldoCliente/100;
+        return saldoCliente / 100.0;
     }
+
 }
