@@ -163,6 +163,12 @@ public class MenuPrincipal {
                     volverMenuVenta = true;
                     //Entra si hay producto suficiente =>                
                 } else if (!volverMenuVenta) {
+                    if (codigoSeleccionado == 6){
+                        System.out.println("¿Desea la leche caliente o fría?"
+                                + "\n1) Caliente"
+                                + "\n2) Fría");
+                        int temperaturaLeche = teclado.nextInt();
+                    }
                     zonaCli.setSaldoCliente(zonaCli.getSaldoCliente() - Producto.productoDelCodigo(codigoSeleccionado).getPrecio());
                     int azucarServida;
                     //Pregunta cuánto azucar desea
