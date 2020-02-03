@@ -13,16 +13,19 @@ import java.util.Scanner;
  */
 public class ZonaAdmin {
 
+    // Atributos 
     private String nombreUsuario;
     private String contraseniaUsuario;
     Scanner teclado = new Scanner(System.in);
     private static int saldo;
 
+    // Instanciación del nombre y la contraseña de usuarios
     public ZonaAdmin() {
         this.nombreUsuario = "pepito";
         this.contraseniaUsuario = "1daw";
     }
 
+    // Devuelve un boolean según el nombre de usuario y contraseña introducidos son correctos
     public boolean loggear() {
         System.out.println("¿Cuál es el nombre de usuario?");
         String nombre = teclado.nextLine();
@@ -35,11 +38,13 @@ public class ZonaAdmin {
         }
     }
 
+    // Usa método para comprobar el estado de los depósitos
     public void comprobarDepositos() {
         System.out.println("- COMPROBACIÓN DE DEPÓSITOS -");
         System.out.println(Deposito.advertenciaUmbral());
     }
 
+    // Muestra por pantalla el estado de cada parte relevante de la cafetera
     public void comprobarEstadoGeneral() {
         System.out.println(" - COMPROBAR ESTADO GENERAL - ");
         System.out.println("Nombre de usuario: " + this.nombreUsuario);
@@ -51,65 +56,30 @@ public class ZonaAdmin {
         System.out.println("Cantidad de agua: " + Deposito.getAgua());
     }
 
+    // Consulta el saldo total de la cafetera
     public void consultarSaldo() {
         System.out.println(" - CONSULTAR SALDO - ");
-        System.out.println("El saldo actual es: " + (saldo/100.0) + "€");
+        System.out.println("El saldo actual es: " + (saldo / 100.0) + "€");
     }
 
+    // Rellena con el método rellenarCantidad en la clase Depósito
     public void rellenarDepositos() {
         System.out.println(" - RELLENAR DEPOSITOS - ");
-        boolean repetir = true;
-        do {
-            System.out.println("¿Cuál quieres rellenar?"
-                    + " 1. Café"
-                    + " 2. Leche"
-                    + " 3. Azúcar"
-                    + " 4. Chocolate"
-                    + " 5. Agua");
-            int eleccion = teclado.nextInt();
-            teclado.nextLine();
-            
-            switch (eleccion){
-                case 1:
-                    Deposito.setCafe(Deposito.getMaximo());
-                    break;
-                case 2:
-                    Deposito.setLeche(Deposito.getMaximo());
-                    break;
-                case 3:
-                    Deposito.setAzucar(Deposito.getMaximo());
-                    break;
-                case 4:
-                    Deposito.setChocolate(Deposito.getMaximo());
-                    break;
-                case 5:
-                    Deposito.setAgua(Deposito.getMaximo());
-                    break;
-                default:
-                    System.out.println("Número fuera del rango.");
-            }
-            System.out.println("Presiona 1 para salir. Presiona 2 para rellenar otro depósito.");
-            int salir = teclado.nextInt();
-            if (salir == 1){
-                repetir = false;
-            }
-        } while (repetir);
+        System.out.println("¿Cuál quieres rellenar? (1-5)");
+        int seleccion = teclado.nextInt();
+        if (seleccion < 0 || seleccion > 6) {
+            System.out.println("Selección incorrecta.");
+        } else {
+            Deposito.rellenarCantidad(seleccion);
+        }
     }
 
     public String getNombreUsuario() {
         return nombreUsuario;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
-
     public String getContraseniaUsuario() {
         return contraseniaUsuario;
-    }
-
-    public void setContraseniaUsuario(String contraseniaUsuario) {
-        this.contraseniaUsuario = contraseniaUsuario;
     }
 
     public static int getSaldo() {

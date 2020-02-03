@@ -12,6 +12,7 @@ import java.util.Scanner;
  * @author juan
  */
 public class Deposito {
+    // Atributos (cada material usado para la preparación de productos + su cantidad máxima/umbral
     private static int cafe;
     private static int leche;
     private static int azucar;
@@ -23,6 +24,7 @@ public class Deposito {
     public Deposito() {
     }
     
+    // Realizado al principio del programa para llenar los depósitos
     public static void inicializarDeposito(){
         cafe = MAXIMO;
         leche = MAXIMO;
@@ -31,6 +33,7 @@ public class Deposito {
         agua = MAXIMO;
     }
     
+    // Advertencia según si les queda menos en el depósito de lo que debería
     public static String advertenciaUmbral(){
         String advertencia = "";
         if (cafe < UMBRAL){
@@ -54,12 +57,12 @@ public class Deposito {
         return advertencia;
     }
     
+    // Rellena lo seleccionado. Se repite si el usuario lo desea.
     public static void rellenarCantidad (int eleccion){
         Scanner teclado = new Scanner (System.in);
         System.out.println("Presiona 1 para rellenar al completo. Presiona 2 para rellenar parcialmente: ");
         int eleccionRelleno = teclado.nextInt();
         teclado.nextLine();
-        
         if (eleccionRelleno == 1){
             switch (eleccion){
                 case 1:
@@ -107,6 +110,7 @@ public class Deposito {
         }
     }
     
+    // Reducción de cada depósito por la cantidad introducida
     public static void reducirCafe(int reduccion){
         cafe -= reduccion;
     }
@@ -147,6 +151,7 @@ public class Deposito {
         agua += aumento;
     }
     
+    // Getter y setter
     public static int getCafe() {
         return cafe;
     }
@@ -196,6 +201,7 @@ public class Deposito {
         return MAXIMO;
     }
     
+    // Comprueba que hay suficiente de lo necesario por producto para poder realizar el pedido y devuelve boolean
     public static boolean depositosSuficientes(int codigo){
         switch(codigo){
             case 1:
@@ -214,17 +220,16 @@ public class Deposito {
         }
     }
     
+    // Reduce cada depósito necesario según el producto utilizado
     public static void reducirDepositos(int codigo){
         switch(codigo){
             case 1://Café solo
                 Deposito.reducirCafe(Producto.CAFE_SOLO.getCafeUsado());
                 Deposito.reducirAgua(Producto.CAFE_SOLO.getAguaUsada());
                 break;
-            case 2://Chocolate
-                Deposito.reducirChocolate(Producto.CHOCOLATE.getChocolateUsado());
-                Deposito.reducirAgua(Producto.CHOCOLATE.getAguaUsada());
-                Deposito.reducirLeche(Producto.CHOCOLATE.getLecheUsado());
-                Deposito.reducirAzucar(Producto.CHOCOLATE.getAzucarUsado());
+            case 2://Solo largo
+                Deposito.reducirCafe(Producto.SOLO_LARGO.getCafeUsado());
+                Deposito.reducirAgua(Producto.SOLO_LARGO.getAguaUsada());
                 break;
             case 3://Con leche
                 Deposito.reducirCafe(Producto.CON_LECHE.getCafeUsado());
@@ -236,13 +241,15 @@ public class Deposito {
                 Deposito.reducirAgua(Producto.CORTADO.getAguaUsada());
                 Deposito.reducirLeche(Producto.CORTADO.getLecheUsado());
                 break;
-            case 5://Leche
+            case 5://Chocolate
+                Deposito.reducirChocolate(Producto.CHOCOLATE.getChocolateUsado());
+                Deposito.reducirAgua(Producto.CHOCOLATE.getAguaUsada());
+                Deposito.reducirLeche(Producto.CHOCOLATE.getLecheUsado());
+                Deposito.reducirAzucar(Producto.CHOCOLATE.getAzucarUsado());
+                break;
+            case 6://Leche
                 Deposito.reducirAgua(Producto.LECHE.getAguaUsada());
                 Deposito.reducirLeche(Producto.LECHE.getLecheUsado());
-                break;
-            case 6://Café Solo largo
-                Deposito.reducirCafe(Producto.SOLO_LARGO.getCafeUsado());
-                Deposito.reducirAgua(Producto.SOLO_LARGO.getAguaUsada());
                 break;
             default:
                 //No llegará nunca aquí

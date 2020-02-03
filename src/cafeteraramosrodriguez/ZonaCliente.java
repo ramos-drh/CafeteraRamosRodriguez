@@ -10,7 +10,7 @@ package cafeteraramosrodriguez;
  * @author ramos
  */
 public class ZonaCliente {
-
+    // Guarda el saldo durante esa compra del usuario
     private int saldoCliente;
     
     public ZonaCliente() {
@@ -25,6 +25,7 @@ public class ZonaCliente {
         this.saldoCliente = saldoCliente;
     }
     
+    // Devuelve el saldo en double (euros)
     public double saldoEuros(){
         return saldoCliente / 100.0;
     }

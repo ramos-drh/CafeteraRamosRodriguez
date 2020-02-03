@@ -11,6 +11,7 @@ package cafeteraramosrodriguez;
  */
 public enum Producto {
 
+    // Los productos disponibles
     CAFE_SOLO(80, "Café solo", 100, 0, 0, 0, 50, 1),
     SOLO_LARGO(90, "Solo largo", 100, 0, 0, 0, 60, 2),
     CON_LECHE(110, "Con leche", 70, 50, 0, 0, 30, 3),
@@ -18,6 +19,7 @@ public enum Producto {
     CHOCOLATE(140, "Chocolate", 0, 40, 0, 60, 40, 5),
     LECHE(50, "Leche caliente o fría", 0, 50, 0, 0, 80, 6);
 
+    // Sus atributos
     private int precio;
     private String nombre;
     private int cafeUsado;
@@ -25,8 +27,9 @@ public enum Producto {
     private int azucarUsado;
     private int chocolateUsado;
     private int aguaUsada;
-    private int codigo;     //Serán un int 1-N (N nº de productos, 6), aunque creo que no es la mejor opción
+    private int codigo;     
 
+    // Constructor
     private Producto(int precio, String nombre, int cafeUsado, int lecheUsado, int azucarUsado, int chocolateUsado, int aguaUsada, int codigo) {
         this.precio = precio;
         this.nombre = nombre;
@@ -38,6 +41,7 @@ public enum Producto {
         this.codigo = codigo;
     }
 
+    // Getter y setter
     public int getPrecio() {
         return precio;
     }
@@ -98,15 +102,14 @@ public enum Producto {
         return codigo;
     }
 
-    //Creo que no es necesario
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
     
+    // Devuelve el producto correspondiente según el código introducido
     public static Producto productoDelCodigo(int codigo){
         
         //El código está seguro entre 1-6 porque se comprueba antes de llamar al método
-        // => nunca entrará en default, pero lo tengo que poner porque sino da error (may not have been inizialited)
         switch(codigo){
             case 1:
                 return Producto.CAFE_SOLO;
@@ -121,10 +124,11 @@ public enum Producto {
             case 6:
                 return Producto.LECHE;
             default:
-                return null;
+                return Producto.LECHE;
         }
     }
 
+    // Método toString para devolver el producto y sus atributos relevantes como String
     @Override
     public String toString() {
         return "Código: " + this.getCodigo() + " \tNombre:" + this.getNombre() + " \tPrecio: " + (this.getPrecio()/100.0) + "€";
