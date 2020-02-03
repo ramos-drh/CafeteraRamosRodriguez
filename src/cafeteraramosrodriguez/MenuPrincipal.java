@@ -107,7 +107,7 @@ public class MenuPrincipal {
             //informando del saldo actual
             while (zonaCli.getSaldoCliente() < Producto.LECHE.getPrecio()) {
                 System.out.println("Se necesitan mínimo 50 céntimos para poder operar.\n"
-                        + "Saldo actual: " + zonaCli.saldoEuros()
+                        + "Saldo actual: " + zonaCli.saldoEuros() + "€"
                         + "\nPor favor, introduzca más:");
                 zonaCli.setSaldoCliente(zonaCli.getSaldoCliente() + teclado.nextInt());
             }
@@ -155,7 +155,7 @@ public class MenuPrincipal {
                     System.out.println("Lo sentimos, no hay suficientes ingredientes. Volverá al menú de ventas y podrá elegir otro producto.");
                     volverMenuVenta = true;
                     //Entra si hay producto suficiente =>                
-                } else {
+                } else if(!volverMenuVenta){
                     zonaCli.setSaldoCliente(zonaCli.getSaldoCliente() - Producto.productoDelCodigo(codigoSeleccionado).getPrecio());
                     int azucarServida;
                     //Pregunta cant azucar y Sirve la bebida (actualizar prod y guardar importe)
@@ -169,7 +169,7 @@ public class MenuPrincipal {
                         azucarServida = 0;
                     }
                     while (zonaCli.getSaldoCliente() < (azucarServida * 10) && repetir) {
-                        System.out.println("Requiere " + (((azucarServida * 10) - zonaCli.getSaldoCliente()) / 100.0) + " más para la compra. Introduzca la diferencia (en céntimos)"
+                        System.out.println("Requiere " + (((azucarServida * 10) - zonaCli.getSaldoCliente()) / 100.0) + "€ más para la compra. Introduzca la diferencia (en céntimos)"
                                 + ", o 0 para cancelar el azúcar:");
                         int ingreso = teclado.nextInt();
                         zonaCli.setSaldoCliente(zonaCli.getSaldoCliente() + ingreso);
