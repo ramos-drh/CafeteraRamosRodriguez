@@ -192,6 +192,10 @@ public class Deposito {
         return UMBRAL;
     }
     
+    public static int getMaximo(){
+        return MAXIMO;
+    }
+    
     public static boolean depositosSuficientes(int codigo){
         switch(codigo){
             case 1:
@@ -215,25 +219,31 @@ public class Deposito {
             case 1://Café solo
                 Deposito.reducirCafe(Producto.CAFE_SOLO.getCafeUsado());
                 Deposito.reducirAgua(Producto.CAFE_SOLO.getAguaUsada());
+                break;
             case 2://Chocolate
                 Deposito.reducirChocolate(Producto.CHOCOLATE.getChocolateUsado());
                 Deposito.reducirAgua(Producto.CHOCOLATE.getAguaUsada());
                 Deposito.reducirLeche(Producto.CHOCOLATE.getLecheUsado());
                 Deposito.reducirAzucar(Producto.CHOCOLATE.getAzucarUsado());
+                break;
             case 3://Con leche
                 Deposito.reducirCafe(Producto.CON_LECHE.getCafeUsado());
                 Deposito.reducirAgua(Producto.CON_LECHE.getAguaUsada());
                 Deposito.reducirLeche(Producto.CON_LECHE.getLecheUsado());
+                break;
             case 4://Cortado
                 Deposito.reducirCafe(Producto.CORTADO.getCafeUsado());
                 Deposito.reducirAgua(Producto.CORTADO.getAguaUsada());
                 Deposito.reducirLeche(Producto.CORTADO.getLecheUsado());
+                break;
             case 5://Leche
                 Deposito.reducirAgua(Producto.LECHE.getAguaUsada());
                 Deposito.reducirLeche(Producto.LECHE.getLecheUsado());
+                break;
             case 6://Café Solo largo
                 Deposito.reducirCafe(Producto.SOLO_LARGO.getCafeUsado());
                 Deposito.reducirAgua(Producto.SOLO_LARGO.getAguaUsada());
+                break;
             default:
                 //No llegará nunca aquí
         }
